@@ -141,6 +141,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onToggleComplete, 
                 padding: '8px 16px 8px ',
                 border: '1px solid #e8e8e8',
                 borderRadius: '10px',
+                bottom: '0px'
             }}>
                 <Pagination
                     current={currentPage}

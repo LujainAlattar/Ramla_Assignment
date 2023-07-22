@@ -69,7 +69,7 @@ const App: React.FC = () => {
       </Header>
       <Content style={{ padding: '20px 50px', display: 'flex', flexWrap: 'wrap', gap: '50px' }}>
         <TaskForm onSubmit={handleAddTask} />
-        <Divider type="vertical" style={{ height: '50px' }} />
+        <Divider type="vertical" style={{ height: '600px' }} />
         <TaskList
           tasks={tasks}
           onDelete={handleDeleteTask}
