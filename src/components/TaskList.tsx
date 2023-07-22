@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { List, Button, Input, Select } from 'antd';
+import { List, Button, Input, Select, Pagination } from 'antd';
 import { Task } from './types';
 import EditTaskModal from './EditTaskModal';
 import { getStoredData, storeData } from './localStorageUtils';
@@ -41,6 +41,22 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onToggleComplete, 
         setEditModalVisible(false);
         setSelectedTask(null);
     };
+
+
+    // Pagination state
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const itemsPerPage = 4; // Number of items to display per page
+
+    // Calculate the indexes for the currently displayed items
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredTasks.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Function to handle page change
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
 
     return (
         <div>
@@ -90,7 +106,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onToggleComplete, 
             <List
                 itemLayout="horizontal"
                 style={{ width: '700px' }}
-                dataSource={filteredTasks}
+                dataSource={currentItems} // Use the currentItems array for pagination
                 renderItem={(task) => (
                     <List.Item
                         actions={[
@@ -117,6 +133,14 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onToggleComplete, 
                         </div>
                     </List.Item>
                 )}
+            />
+            {/* Pagination component */}
+            <Pagination
+                current={currentPage}
+                pageSize={itemsPerPage}
+                total={filteredTasks.length}
+                onChange={handlePageChange}
+                style={{ margin: '16px 0', textAlign: 'center' }}
             />
             {/* Render the EditTaskModal outside the List */}
             {selectedTask && (
