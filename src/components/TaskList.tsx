@@ -135,13 +135,20 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onToggleComplete, 
                 )}
             />
             {/* Pagination component */}
-            <Pagination
-                current={currentPage}
-                pageSize={itemsPerPage}
-                total={filteredTasks.length}
-                onChange={handlePageChange}
-                style={{ margin: '16px 0', textAlign: 'center' }}
-            />
+            <div style={{
+                backgroundColor: '#fff',
+                marginTop: '27px',
+                padding: '8px 16px 8px ',
+                border: '1px solid #e8e8e8',
+                borderRadius: '10px',
+            }}>
+                <Pagination
+                    current={currentPage}
+                    pageSize={itemsPerPage}
+                    total={filteredTasks.length}
+                    onChange={handlePageChange}
+                />
+            </div>
             {/* Render the EditTaskModal outside the List */}
             {selectedTask && (
                 <EditTaskModal
